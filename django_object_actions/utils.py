@@ -47,10 +47,15 @@ class BaseDjangoObjectActions(object):
                 custom_attrs=custom_attrs,
             )
 
-        context['objectactions'] = [
-            to_dict(x) for x in
-            self.get_object_actions(request, context, **kwargs)
-        ]
+        items = []
+        for tool in self.get_object_actions(request, context, **kwargs):
+            if isinstance(tool, basestring):
+                items.append(to_dict(tool))
+            if isinstance(tool, dict):
+                items.append(tool)
+
+        context['objectactions'] = items
+
         return super(BaseDjangoObjectActions, self).render_change_form(
             request, context, **kwargs)
 
