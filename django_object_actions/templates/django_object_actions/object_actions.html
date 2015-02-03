@@ -1,10 +1,10 @@
 {% for tool in objectactions %}
-  <li class="objectaction-item" data-tool-name="{{ tool.name }}">
-    <a href='{% if tool.url %}{{ tool.url }}{% else %}tools/{{ tool.name }}/{% endif %}' title="{{ tool.standard_attrs.title }}"
+  <li class="objectaction-item" data-tool-name="{{ tool.name }}" title="{{ tool.tooltip }}" data-toggle="tooltip">
+    <a href='{% if tool.url %}{{ tool.url }}{% else %}tools/{{ tool.name }}/{% endif %}' title='{{ tool.standard_attrs.title }}'
        {% for k, v in tool.custom_attrs.items %}
          {{ k }}="{{ v }}"
        {% endfor %}
-       class="{{ tool.standard_attrs.class }}">
+       class="{{ tool.standard_attrs.class }} {% if not tool.enabled %}disabled-link{% endif %}">
     {{ tool.label|capfirst }}
     </a>
   </li>

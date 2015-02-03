@@ -43,6 +43,7 @@ class BaseDjangoObjectActions(object):
             return dict(
                 name=tool_name,
                 label=getattr(tool, 'label', tool_name),
+                tooltip=getattr(tool, 'tooltip', ''),
                 standard_attrs=standard_attrs,
                 custom_attrs=custom_attrs,
             )
